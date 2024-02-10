@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+GenericName=Export_user_dbus
+Name=Export user dbus
+Comment=Export user dbus address.
+Exec=/usr/local/bin/user-dbus
+Terminal=false
+Categories=System;
+StartupNotify=false

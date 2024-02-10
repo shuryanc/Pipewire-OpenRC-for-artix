@@ -1,0 +1,4 @@
+#!/bin/sh
+
+USERID=$(id -u ${PAM_USER})
+result=$(export USERID; await-user-dbus  > /run/user/${USERID}/user-service-start.log 2>&1 &)

@@ -1,0 +1,40 @@
+#!/usr/bin/openrc-run
+
+# Work based on file by "Gentoo Authors", 2022
+# Modified for Artix Linux by dreieck, 2023
+# Modified for Artix Linux by Daniel Chan, 2024
+# Distributed under the terms of the GNU General Public License v2
+
+USER="`id -nu ${RC_RUNLEVEL}`"
+PIPEWIRE_RUNTIME_DIR="/run/user/${RC_RUNLEVEL}"
+PULSE_RUNTIME_PATH="/run/user/${RC_RUNLEVEL}/pulse"
+DBUS_SESSION_BUS_ADDRESS=$(cat /run/user/${RC_RUNLEVEL}/.dbus_session)
+
+# XDG_RUNTIME_DIR=""
+name="pipewire pulseaudio dropin daemon"
+description="Makes pipewire to be a drop-in for PulseAudio."
+command=/usr/bin/pipewire-pulse
+command_args="${pipewire_pulse_args[@]}"
+command_background=yes
+command_user="${USER}:${USER}"
+pidfile="${PULSE_RUNTIME_PATH}/pipewire-pulse.pid"
+
+depend() {
+  need pipewire
+}
+
+start_pre() {
+  export USER
+  export PIPEWIRE_RUNTIME_DIR
+  export PULSE_RUNTIME_PATH
+  export DBUS_SESSION_BUS_ADDRESS
+  export XDG_RUNTIME_DIR=${PULSE_RUNTIME_PATH}
+}
+
+start_post() {
+  einfo "Wait for the pulse socket to be ready ..."
+  sleep 3
+  find "${PULSE_RUNTIME_PATH}" -type s -exec chmod g+w '{}' ';'
+  einfo "Socket file(s): $(find "${PULSE_RUNTIME_PATH}" -type s)"
+}
+

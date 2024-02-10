@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "$DBUS_SESSION_BUS_ADDRESS" > /run/user/${UID}/.dbus_session

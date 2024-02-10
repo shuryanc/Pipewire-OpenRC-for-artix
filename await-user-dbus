@@ -1,0 +1,19 @@
+#!/bin/sh
+
+rm /run/user/${USERID}/.dbus_session
+if [ -f "/run/user/${USERID}/.dbus_session" ]; then
+	openrc ${USERID}
+	exit 0
+fi
+timeout=30
+elapsed=0
+
+while [ $elapsed -lt $timeout ]; do
+	if [ -f "/run/user/${USERID}/.dbus_session" ]; then
+		openrc ${USERID}
+
+	fi
+	sleep 1
+	elapsed=$((elapsed +1 ))
+done
+exit 1
