@@ -1,4 +1,4 @@
-This is repo contains scripts for Artix to start pipewire, pipewire-pulse and wireplumber from openrc.
+This repo contains scripts for Artix to start pipewire, pipewire-pulse and wireplumber from openrc.
 This is just for my own user and I am not going to support it. But you are free to fork it to make it better.
 
 **Prerequisite**
