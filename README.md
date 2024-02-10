@@ -40,9 +40,20 @@ runlevel switching would be completed after the dbus session file is found so th
 
 mkdir /etc/runlevels/1000
 
+
 *Stack the run level*
 
 rc-update -s add default 1000
+
+
+*Add service to user runlevel*
+
+rc-update add pipewire 1000
+
+rc-update add pipewire-pulse 1000
+
+rc-update add wireplumber 1000
+
 
 *Append PAM to change runlevel after login*
 
@@ -64,7 +75,4 @@ session   include   system-login
 
 session   optional  pam_exec.so /usr/local/bin/user-service-start
 
-*Add service to user runlevel*
-rc-update add pipewire 1000
-rc-update add pipewire-pulse 1000
-rc-update add wireplumber 1000
+
