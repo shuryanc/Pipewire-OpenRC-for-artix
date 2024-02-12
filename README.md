@@ -14,7 +14,7 @@ After login, PAM would change the runlevel to user runlevel by UID.
 
 It will await the session (for me, its gnome session) to be started and export the DBUS_SESSION_BUS_ADDRESS to a file. (timeout is 30s)
 
-runlevel switching would be completed after the dbus session file is found so that the pipewire servic can retrieve the DBUS_SESSION_BUS_ADDRESS to work.
+runlevel switching would be completed after the dbus session file is found so that the pipewire service can retrieve the DBUS_SESSION_BUS_ADDRESS to work.
 
 
 **File Structure**
